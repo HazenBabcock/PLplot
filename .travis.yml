@@ -2,15 +2,14 @@ sudo: required
 dist: trusty
 language: generic
 
-#compiler:
-#  -gcc
-#  -g++
-#  -gfortran
-  
 before_install:
   - sudo apt-get -qq update
+  - sudo apt-get --yes install cmake
   - sudo apt-get --yes install gfortran
   - sudo apt-get --yes install swig
+  - sudo apt-get --yes install python-dev
+  - sudo apt-get --yes install openjdk-7-jdk
+  - sudo apt-get --yes install libqhull-dev
 
 #  - if [ $TRAVIS_OS_NAME == linux ]; then sudo apt-get --yes --force-yes update && sudo apt-get --yes --force-yes install libgsl0-dev ; fi
 #  - if [ $TRAVIS_OS_NAME == osx ]; then brew uninstall --force gcc carthage && brew update && brew upgrade && brew install ${BREW} ; fi
