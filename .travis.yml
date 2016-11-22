@@ -1,0 +1,29 @@
+sudo: required
+dist: trusty
+language: generic
+
+compiler:
+  -gcc
+  -g++
+  -gfortran
+  
+before_install:
+  - sudo apt-get -qq update
+#  - if [ $TRAVIS_OS_NAME == linux ]; then sudo apt-get --yes --force-yes update && sudo apt-get --yes --force-yes install libgsl0-dev ; fi
+#  - if [ $TRAVIS_OS_NAME == osx ]; then brew uninstall --force gcc carthage && brew update && brew upgrade && brew install ${BREW} ; fi
+
+script:
+  - cmake -DBUILDTEST=ON
+  - make
+  - ctest
+
+branches:
+  only:
+    - master
+
+notifications:
+  email:
+    recipients:
+      - hbabcock@mac.com
+    on_success: never
+    on_failure: always
