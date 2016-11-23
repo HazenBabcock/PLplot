@@ -191,7 +191,7 @@ install:
 script:
   - cmake ../PLplot -DBUILD_TEST=ON -DENABLE_tk=OFF
   - make
-  - ctest
+  - ctest --verbose
 
 branches:
   only:
