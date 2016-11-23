@@ -91,7 +91,7 @@ matrix:
             - g++-5
             - gfortran-5
             - liblasi-dev
-      env: CC='gcc-5' CXX='g++-5' FC='gfortran-5' PLTEST='LUA'      
+      env: CC='gcc-5' CXX='g++-5' FC='gfortran-5' PLTEST='LASI'
     # Lua
     - os: linux
       addons:
@@ -155,16 +155,18 @@ before_install:
   - sudo apt-get --yes install itcl3
   - sudo apt-get --yes install itcl3-dev
   - sudo apt-get --yes install libcairo-dev
+  - sudo apt-get --yes install libgtk2.0-dev
+  - sudo apt-get --yes install libhpdf-dev
   - sudo apt-get --yes install libpango1.0-dev
   - sudo apt-get --yes install libpangocairo-1.0-0
   - sudo apt-get --yes install libshp-dev
   - sudo apt-get --yes install pdl 
   - sudo apt-get --yes install python-dev
   - sudo apt-get --yes install python-numpy
+  - sudo apt-get --yes install python-qt4
+  - sudo apt-get --yes install python-qt4-dev  
   - sudo apt-get --yes install sip-dev
   - sudo apt-get --yes install swig
-  - sudo apt-get --yes install tk8.5-dev
-  - sudo apt-get --yes install itk3
 
 #  - if [ $TRAVIS_OS_NAME == linux ]; then sudo apt-get --yes --force-yes update && sudo apt-get --yes --force-yes install libgsl0-dev ; fi
 #  - if [ $TRAVIS_OS_NAME == osx ]; then brew uninstall --force gcc carthage && brew update && brew upgrade && brew install ${BREW} ; fi
