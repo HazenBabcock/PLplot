@@ -22,6 +22,6 @@ build_script:
     - cd %APPVEYOR_BUILD_FOLDER%
     - echo %cd%
     - dir
-    - bash -lc "cmake"
+    - bash -lc "cmake ."
     - bash -lc "make"
     - bash -lc "ctest"
