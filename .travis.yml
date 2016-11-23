@@ -88,15 +88,20 @@ before_install:
 
 install:
   # Hand install a more recent version of cmake..
+  - pwd
+  - ls
   - mkdir ~/cmake_tmp
   - cd ~/cmake_tmp
   - wget https://cmake.org/files/v3.7/cmake-3.7.0-Linux-x86_64.tar.gz
   - tar -xf cmake-3.7.0-Linux-x86_64.tar.gz
   - sudo cp -r cmake-3.7.0-Linux-x86_64/bin/* /usr/local/bin/.
   - sudo cp -r cmake-3.7.0-Linux-x86_64/share/* /usr/local/share/.
+  - cd ..
+  - mkdir ~/build
+  - cd ~/build
 
 script:
-  - cmake -DBUILD_TEST=ON -DENABLE_tk=OFF
+  - cmake ../plplot -DBUILD_TEST=ON -DENABLE_tk=OFF
   - make
   - ctest
 
