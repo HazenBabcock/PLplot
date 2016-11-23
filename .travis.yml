@@ -83,12 +83,18 @@ before_install:
   - sudo apt-get --yes install tk8.5-dev
   - sudo apt-get --yes install itk3
 
-
 #  - if [ $TRAVIS_OS_NAME == linux ]; then sudo apt-get --yes --force-yes update && sudo apt-get --yes --force-yes install libgsl0-dev ; fi
 #  - if [ $TRAVIS_OS_NAME == osx ]; then brew uninstall --force gcc carthage && brew update && brew upgrade && brew install ${BREW} ; fi
 
+install:
+  - mkdir ~/cmake_tmp
+  - cd ~/cmake_tmp
+  - wget https://cmake.org/files/v3.7/cmake-3.7.0-Linux-x86_64.tar.gz
+  - tar -xf cmake-3.7.0-Linux-x86_64.tar.gz
+  - sudo cp -r cmake-3.7.0-Linux-x86_64/* /usr/local
+
 script:
-  - cmake -DBUILD_TEST=ON
+  - cmake -DBUILD_TEST=ON -DENABLE_tk=OFF
   - make
   - ctest
 
