@@ -4,6 +4,7 @@ language: generic
 
 matrix:
   include:
+    # CLang
     - os: linux
       addons:
         apt:
@@ -12,6 +13,7 @@ matrix:
           packages:
             - clang
       env: CC='clang' CXX='clang++'
+    # GCC 4.8
     - os: linux
       addons:
         apt:
@@ -21,6 +23,7 @@ matrix:
             - gcc-4.8
             - g++-4.8
       env: CC='gcc-4.8' CXX='g++-4.8'
+    # GCC 4.9
     - os: linux
       addons:
         apt:
@@ -31,6 +34,7 @@ matrix:
             - g++-4.9
             - gfortran-4.9
       env: CC='gcc-4.9' CXX='g++-4.9' FC='gfortran-4.9'
+    # GCC 5
     - os: linux
       addons:
         apt:
@@ -41,6 +45,7 @@ matrix:
             - g++-5
             - gfortran-5
       env: CC='gcc-5' CXX='g++-5' FC='gfortran-5'
+    # GCC 6
     - os: linux
       addons:
         apt:
@@ -75,6 +80,18 @@ matrix:
             - gfortran-5
             - gdc
       env: CC='gcc-5' CXX='g++-5' FC='gfortran-5' PLTEST='D'
+    # Lasi
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - gcc-5
+            - g++-5
+            - gfortran-5
+            - liblasi-dev
+      env: CC='gcc-5' CXX='g++-5' FC='gfortran-5' PLTEST='LUA'      
     # Lua
     - os: linux
       addons:
@@ -138,7 +155,6 @@ before_install:
   - sudo apt-get --yes install itcl3
   - sudo apt-get --yes install itcl3-dev
   - sudo apt-get --yes install libcairo-dev
-  - sudo apt-get --yes install liblasi-dev
   - sudo apt-get --yes install libpango1.0-dev
   - sudo apt-get --yes install libpangocairo-1.0-0
   - sudo apt-get --yes install libshp-dev
