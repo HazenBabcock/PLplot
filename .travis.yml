@@ -12,7 +12,7 @@ before_install:
   - sudo apt-get --yes install libxml-parser-perl
   - sudo apt-get --yes install default-jdk
   - sudo apt-get --yes install default-jre
-  - sudo apt-get --yes install itcl
+  - sudo apt-get --yes install itcl3
   - sudo apt-get --yes install libcairo-dev
   - sudo apt-get --yes install libwxgtk3.0-dev
   - sudo apt-get --yes install lua5.1
@@ -22,8 +22,8 @@ before_install:
   - sudo apt-get --yes install python-dev
   - sudo apt-get --yes install python-numpy
   - sudo apt-get --yes install swig
-  - sudo apt-get --yes install tk
-  - sudo apt-get --yes install itk
+  - sudo apt-get --yes install tk8.5-dev
+  - sudo apt-get --yes install itk3
 
 
 #  - if [ $TRAVIS_OS_NAME == linux ]; then sudo apt-get --yes --force-yes update && sudo apt-get --yes --force-yes install libgsl0-dev ; fi
