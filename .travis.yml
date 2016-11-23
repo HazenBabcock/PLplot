@@ -111,6 +111,7 @@ matrix:
             - gcc-5
             - g++-5
             - gfortran-5
+	    - liboctave-dev
             - octave
       env: CC='gcc-5' CXX='g++-5' FC='gfortran-5' PLTEST='OCTAVE'
     # wxwidgets
@@ -138,7 +139,6 @@ before_install:
   - sudo apt-get --yes install itcl3-dev
   - sudo apt-get --yes install libcairo-dev
   - sudo apt-get --yes install liblasi-dev
-  - sudo apt-get --yes install liboctave-dev
   - sudo apt-get --yes install libpango1.0-dev
   - sudo apt-get --yes install libpangocairo-1.0-0
   - sudo apt-get --yes install libshp-dev
