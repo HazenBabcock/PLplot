@@ -10,15 +10,56 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
+            - clang
+      env: CC='clang' CXX='clang++'
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - gcc-4.8
+            - g++-4.8
+            - gfortran-4.8
+      env: CC='gcc-4.8' CXX='g++-4.8' FC='gfortran-4.8'
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - gcc-4.9
+            - g++-4.9
+            - gfortran-4.9
+      env: CC='gcc-4.9' CXX='g++-4.9' FC='gfortran-4.9'
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - gcc-5
+            - g++-5
             - gfortran-5
-      env: FC='gfortran-5'
-      
+      env: CC='gcc-5' CXX='g++-5' FC='gfortran-5'
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - gcc-6
+            - g++-6
+            - gfortran-6
+      env: CC='gcc-6' CXX='g++-6' FC='gfortran-6'
+
+	    
 before_install:
   - sudo apt-get -qq update
-  - sudo apt-get --yes install camlidl
+#  - sudo apt-get --yes install camlidl
   - sudo apt-get --yes install cmake
 #  - sudo apt-get --yes install gfortran
-  - sudo apt-get --yes install gnat
+#  - sudo apt-get --yes install gnat
   - sudo apt-get --yes install libqhull-dev
   - sudo apt-get --yes install libxml-dom-perl  
   - sudo apt-get --yes install libxml-parser-perl
