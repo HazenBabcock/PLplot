@@ -10,10 +10,21 @@ before_install:
   - sudo apt-get --yes install libqhull-dev
   - sudo apt-get --yes install libxml-dom-perl  
   - sudo apt-get --yes install libxml-parser-perl
-  - sudo apt-get --yes install openjdk-7-jdk
+  - sudo apt-get --yes install default-jdk
+  - sudo apt-get --yes install default-jre
+  - sudo apt-get --yes install itcl
+  - sudo apt-get --yes install libcairo-dev
+  - sudo apt-get --yes install libwxgtk3.0-dev
+  - sudo apt-get --yes install lua5.1
+  - sudo apt-get --yes install ocaml	
+  - sudo apt-get --yes install octave
+  - sudo apt-get --yes install pdl 
   - sudo apt-get --yes install python-dev
   - sudo apt-get --yes install python-numpy
   - sudo apt-get --yes install swig
+  - sudo apt-get --yes install tk
+  - sudo apt-get --yes install itk
+
 
 #  - if [ $TRAVIS_OS_NAME == linux ]; then sudo apt-get --yes --force-yes update && sudo apt-get --yes --force-yes install libgsl0-dev ; fi
 #  - if [ $TRAVIS_OS_NAME == osx ]; then brew uninstall --force gcc carthage && brew update && brew upgrade && brew install ${BREW} ; fi
