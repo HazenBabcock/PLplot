@@ -4,6 +4,7 @@ language: generic
 
 before_install:
   - sudo apt-get -qq update
+  - sudo apt-get --yes install camlidl
   - sudo apt-get --yes install cmake
 #  - sudo apt-get --yes install gfortran
   - sudo apt-get --yes install gnat
@@ -13,9 +14,15 @@ before_install:
   - sudo apt-get --yes install default-jdk
   - sudo apt-get --yes install default-jre
   - sudo apt-get --yes install itcl3
+  - sudo apt-get --yes install itcl3-dev
   - sudo apt-get --yes install libcairo-dev
+  - sudo apt-get --yes install liboctave-dev
+  - sudo apt-get --yes install libpango1.0-dev
+  - sudo apt-get --yes install libpangocairo-1.0-0
   - sudo apt-get --yes install libwxgtk3.0-dev
-  - sudo apt-get --yes install lua5.1
+  - sudo apt-get --yes install liblua50
+  - sudo apt-get --yes install liblua50-dev
+  - sudo apt-get --yes install lua50
   - sudo apt-get --yes install ocaml	
   - sudo apt-get --yes install octave
   - sudo apt-get --yes install pdl 
