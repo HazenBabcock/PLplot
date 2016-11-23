@@ -87,11 +87,13 @@ before_install:
 #  - if [ $TRAVIS_OS_NAME == osx ]; then brew uninstall --force gcc carthage && brew update && brew upgrade && brew install ${BREW} ; fi
 
 install:
+  # Hand install a more recent version of cmake..
   - mkdir ~/cmake_tmp
   - cd ~/cmake_tmp
   - wget https://cmake.org/files/v3.7/cmake-3.7.0-Linux-x86_64.tar.gz
   - tar -xf cmake-3.7.0-Linux-x86_64.tar.gz
-  - sudo cp -r cmake-3.7.0-Linux-x86_64/* /usr/local
+  - sudo cp -r cmake-3.7.0-Linux-x86_64/bin/* /usr/local/bin/.
+  - sudo cp -r cmake-3.7.0-Linux-x86_64/share/* /usr/local/share/.
 
 script:
   - cmake -DBUILD_TEST=ON -DENABLE_tk=OFF
