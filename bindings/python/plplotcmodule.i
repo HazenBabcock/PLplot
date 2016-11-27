@@ -1123,7 +1123,7 @@ typedef void ( *label_func )( PLINT, PLFLT, char *, PLINT, PLPointer );
 
     void do_label_callback( PLINT axis, PLFLT value, char *string, PLINT len, PLPointer data )
     {
-        PyObject *pdata, *arglist, *result;
+        PyObject *pdata, *arglist, *result, *unicode_string;
         char     *pystring;
 
         // the data argument is acutally a pointer to a python object
@@ -1152,16 +1152,24 @@ typedef void ( *label_func )( PLINT, PLFLT, char *, PLINT, PLPointer );
                 fprintf( stderr, "label callback failed with 3 arguments\n" );
                 PyErr_SetString( PyExc_RuntimeError, "label callback must take 3 arguments." );
             }
-            else if ( !PyString_Check( result ) )
-            {
-                fprintf( stderr, "label callback must return a string\n" );
-                PyErr_SetString( PyExc_RuntimeError, "label callback must return a string." );
-            }
-            else
-            {
+            else if ( PyString_Check( result ) )
+	    {
                 // should I test the type here?
                 pystring = PyString_AsString( result );
                 strncpy( string, pystring, len );
+	    }
+	    else if ( PyUnicode_Check( result ))
+	    {
+	        // unicode_string is never freed? memory leak here?
+	      	unicode_string = PyUnicode_AsEncodedString( result , "utf-8", "Error ~");
+		pystring = PyBytes_AS_STRING( unicode_string );
+		// len may be different then the byte string length w/ unicode?
+                strncpy( string, pystring, len );
+	    }
+	    else
+	    {
+                fprintf( stderr, "label callback must return a string\n" );
+                PyErr_SetString( PyExc_RuntimeError, "label callback must return a string." );
             }
             // release the result
             Py_CLEAR( result );
@@ -1592,6 +1600,8 @@ typedef void ( *label_func )( PLINT, PLFLT, char *, PLINT, PLPointer );
 %typemap ( in ) ( int *p_argc, char **argv ) ( int tmp )
 {
     int i;
+    PyObject *unicode_string;
+    
     if ( !PyList_Check( $input ) )
     {
         PyErr_SetString( PyExc_ValueError, "Expecting a list" );
@@ -1604,11 +1614,12 @@ typedef void ( *label_func )( PLINT, PLFLT, char *, PLINT, PLPointer );
     {
         PyObject *s = PyList_GetItem( $input, i );
         if ( PyString_Check( s ) ){
-	  $2[i] = PyString_AsString( s );
+	    $2[i] = PyString_AsString( s );
 	}
 	else if ( PyUnicode_Check( s ) ){
-	  $2[i] = PyUnicode_AsEncodedString( s , "utf-8", "Error ~");
-	  $2[i] = PyBytes_AS_STRING( $2[i] );
+	    // unicode_string is never freed? memory leak here?
+	    unicode_string = PyUnicode_AsEncodedString( s , "utf-8", "Error ~");
+	    $2[i] = PyBytes_AS_STRING( unicode_string );
 	}
 	else{
             free( $2 );
