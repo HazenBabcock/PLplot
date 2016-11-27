@@ -49,9 +49,9 @@ def main():
         plcol1(i / 9.0)
         plpsty(0)
         fbox( (1980. + i), y0[i] )
-        string = `y0[i]`
+        string = repr(y0[i])
         plptex((1980. + i + .5), (y0[i] + 1.), 1.0, 0.0, .5, string)
-        string = `1980 + i`
+        string = repr(1980 + i)
         plmtex("b", 1.0, ((i + 1) * .1 - .05), 0.5, string)
 
     # Restore defaults

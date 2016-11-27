@@ -41,7 +41,7 @@ def draw_windows(nw, cmap0_offset):
             vmin = vmin + 0.1
             vmax = vmax - 0.1
         plwidth(1)
-        plptex(0.5, 0.5, 1.0, 0.0, 0.5, `i`)
+        plptex(0.5, 0.5, 1.0, 0.0, 0.5, repr(i))
 
 # Demonstrate multiple windows and default color map 0 palette.
 def demo1():

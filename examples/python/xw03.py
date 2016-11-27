@@ -51,7 +51,7 @@ def main():
 
         # Write labels for angle
 
-        text = `int(theta)`
+        text = repr(int(theta))
         if theta < 9.99:
             offset = 0.45
         elif theta < 99.9:
