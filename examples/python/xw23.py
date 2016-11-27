@@ -278,8 +278,8 @@ def main():
         plschr(0., 0.75)
         for i in range(0,FCI_COMBINATIONS):
             family_index = i % 5
-            style_index = (i/5) % 3
-            weight_index = ((i/5)/3) % 2
+            style_index = int((i/5) % 3)
+            weight_index = int(((i/5)/3) % 2)
             if(page == 11):
                 plsfci(fci[i])
                 string = "Page 12, "+family[family_index]+", "+style[style_index]+", "+weight[weight_index]+":  "+"The quick brown fox jumps over the lazy dog"
