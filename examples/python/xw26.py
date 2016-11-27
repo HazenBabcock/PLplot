@@ -93,7 +93,7 @@ def main():
     len(alty_label) != nlang or \
     len(title_label) != nlang or \
     len(line_label) != nlang:
-        raise RuntimeError, "Internal inconsistency in label dimension"
+        raise RuntimeError("Internal inconsistency in label dimension")
 
     plfont(2)
 
