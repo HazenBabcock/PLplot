@@ -1603,13 +1603,19 @@ typedef void ( *label_func )( PLINT, PLFLT, char *, PLINT, PLPointer );
     for ( i = 0; i < tmp; i++ )
     {
         PyObject *s = PyList_GetItem( $input, i );
-        if ( !PyString_Check( s ) )
-        {
+        if ( PyString_Check( s ) ){
+	  $2[i] = PyString_AsString( s );
+	}
+	else if ( PyUnicode_Check( s ) ){
+	  $2[i] = PyUnicode_AsEncodedString( s , "utf-8", "Error ~");
+	  $2[i] = PyBytes_AS_STRING( $2[i] );
+	}
+	else{
             free( $2 );
             PyErr_SetString( PyExc_ValueError, "List items must be strings" );
             return NULL;
         }
-        $2[i] = PyString_AsString( s );
+
     }
     $2[i] = 0;
 }
