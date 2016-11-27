@@ -48,11 +48,11 @@ def plot1(type):
     plwind(-2., 3.0, -80.0, 0.0)
     plcol0(1)
     if type == 0:
-	plbox("bclnst", 0.0, 0, "bnstv", 0.0, 0)
+        plbox("bclnst", 0.0, 0, "bnstv", 0.0, 0)
     elif type == 1:
-	plbox("bcfghlnst", 0.0, 0, "bcghnstv", 0.0, 0)
+        plbox("bcfghlnst", 0.0, 0, "bcghnstv", 0.0, 0)
     else:
-	print("error: type must be either 0 or 1")
+        print("error: type must be either 0 or 1")
     plcol0(2)
     plline(freql, ampl)
     plcol0(2)
@@ -68,13 +68,13 @@ def plot1(type):
     # For the gridless case, put phase vs freq on same plot
     if type == 0:
         plcol0(1)
-	plwind(-2.0, 3.0, -100.0, 0.0)
-	plbox("", 0.0, 0, "cmstv", 30.0, 3)
-	plcol0(3)
-	plline(freql, phase)
-	plstring(freql, phase, "#(728)")
-	plcol0(3)
-	plmtex("r", 5.0, 0.5, 0.5, "Phase shift (degrees)")
+        plwind(-2.0, 3.0, -100.0, 0.0)
+        plbox("", 0.0, 0, "cmstv", 30.0, 3)
+        plcol0(3)
+        plline(freql, phase)
+        plstring(freql, phase, "#(728)")
+        plcol0(3)
+        plmtex("r", 5.0, 0.5, 0.5, "Phase shift (degrees)")
         nlegend = 2
     else:
         nlegend = 1

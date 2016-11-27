@@ -51,11 +51,11 @@ def cmap1_init():
 def main():
 
     title = ["Cubic Spline Approximation",
-		   "Delaunay Linear Interpolation",
-		   "Natural Neighbors Interpolation",
-		   "KNN Inv. Distance Weighted",
-		   "3NN Linear Interpolation",
-		   "4NN Around Inv. Dist. Weighted"]
+                   "Delaunay Linear Interpolation",
+                   "Natural Neighbors Interpolation",
+                   "KNN Inv. Distance Weighted",
+                   "3NN Linear Interpolation",
+                   "4NN Around Inv. Dist. Weighted"]
 
     opt = [0., 0., 0., 0., 0., 0.]
 
@@ -77,8 +77,8 @@ def main():
     xt = zeros(pts)
     yt = zeros(pts)
     for i in range(pts) :
-	xt[i] = (xM-xm)*plrandd()
-	yt[i] = (yM-ym)*plrandd()
+        xt[i] = (xM-xm)*plrandd()
+        yt[i] = (yM-ym)*plrandd()
     if randn == 0 :
         x = xt + xm
         y = yt + ym
@@ -147,7 +147,7 @@ def main():
             lzM = max(zg.flat)
             lzm = min(zg.flat)
 
-	    lzm = min(lzm,zmin)
+            lzm = min(lzm,zmin)
             lzM = max(lzM,zmax)
 
             lzm = lzm - 0.01

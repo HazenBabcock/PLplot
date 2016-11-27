@@ -169,7 +169,7 @@ def plot3():
   plssym(0.0,0.5)
   plpoin(x, y, 2)
   plline(x, y)
-	
+        
 def plot4():
 
   # TAI-UTC (seconds) as a function of time.
@@ -328,5 +328,5 @@ def plot4():
     plcol0(4)
 
     plline(x, y)
-	
+        
 main()

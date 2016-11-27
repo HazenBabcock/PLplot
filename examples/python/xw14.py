@@ -31,7 +31,7 @@ from plplot import *
 # Parse and process command line arguments
 plparseopts(sys.argv, PL_PARSE_FULL)
 
-#	Simple line plot and multiple windows demo.
+#       Simple line plot and multiple windows demo.
 
 from plplot_py_demos import *
 
@@ -63,7 +63,7 @@ def main():
     plsfam(fam, num, bmax)
     plsetopt("fflen","2")
     plinit()
-		
+                
     # Set up the data & plot
     # Original case
 
@@ -74,23 +74,23 @@ def main():
     xoff = 0.
     yoff = 0.
     plot1(xscale, yscale, xoff, yoff)
-			
+                        
     # Set up the data & plot
-			
+                        
     xscale = 1.
     yscale = 1.e+6
     plot1(xscale, yscale, xoff, yoff)
-				
+                                
     # Set up the data & plot
-				
+                                
     xscale = 1.
     yscale = 1.e-6
     digmax = 2
     plsyax(digmax, 0)
     plot1(xscale, yscale, xoff, yoff)
-							
+                                                        
     # Set up the data & plot
-							
+                                                        
     xscale = 1.
     yscale = 0.0014
     yoff = 0.0185
@@ -104,21 +104,21 @@ def main():
     plsstrm(1)
     plot4()
     pleop()
-		
+                
     # Back to master
-		
+                
     plsstrm(0)
     plot2()
     plot3()
-			
+                        
     # To slave
-			
+                        
     plsstrm(1)
     plot5()
     pleop()
-					
+                                        
     # Back to master to wait for user to advance
-					
+                                        
     plsstrm(0)
     pleop()
 # ===============================================================
@@ -175,8 +175,8 @@ def plot2():
 
     x = (arange(100)-19)/6.0
     if 0.0 in x:
-	#replace 0.0 by small value that gives the same sinc(x) result.
-	x[list(x).index(0.0)] = 1.e-30
+        #replace 0.0 by small value that gives the same sinc(x) result.
+        x[list(x).index(0.0)] = 1.e-30
     y = sin(x)/x
 
     # Draw the line
@@ -244,26 +244,26 @@ def plot4():
 
     # Draw circles for polar grid
     for i in range(10):
-	plline(x[i], y[i])
+        plline(x[i], y[i])
 
     plcol0(2)
     for i in range(12):
-	theta = 30.0 * i
-	dx = cos(dtr * theta)
-	dy = sin(dtr * theta)
+        theta = 30.0 * i
+        dx = cos(dtr * theta)
+        dy = sin(dtr * theta)
 
-	# Draw radial spokes for polar grid
+        # Draw radial spokes for polar grid
 
-	pljoin(0.0, 0.0, dx, dy)
+        pljoin(0.0, 0.0, dx, dy)
 
-	# Write labels for angle
+        # Write labels for angle
 
-	text = `int(theta)`
+        text = `int(theta)`
 #Slightly off zero to avoid floating point logic flips at 90 and 270 deg.
-	if dx >= -0.00001:
-	    plptex(dx, dy, dx, dy, -0.15, text)
-	else:
-	    plptex(dx, dy, -dx, -dy, 1.15, text)
+        if dx >= -0.00001:
+            plptex(dx, dy, dx, dy, -0.15, text)
+        else:
+            plptex(dx, dy, -dx, -dy, 1.15, text)
 
     # Draw the graph
 

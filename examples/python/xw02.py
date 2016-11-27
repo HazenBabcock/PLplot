@@ -29,19 +29,19 @@ def draw_windows(nw, cmap0_offset):
     plfont(4)
 
     for i in range(nw):
-	plcol0(i+cmap0_offset)
-	pladv(0)
-	vmin = 0.1
-	vmax = 0.9
-	for j in range(3):
-	    plwidth(j + 1)
-	    plvpor(vmin, vmax, vmin, vmax)
-	    plwind(0.0, 1.0, 0.0, 1.0)
-	    plbox("bc", 0.0, 0, "bc", 0.0, 0)
-	    vmin = vmin + 0.1
-	    vmax = vmax - 0.1
-	plwidth(1)
-	plptex(0.5, 0.5, 1.0, 0.0, 0.5, `i`)
+        plcol0(i+cmap0_offset)
+        pladv(0)
+        vmin = 0.1
+        vmax = 0.9
+        for j in range(3):
+            plwidth(j + 1)
+            plvpor(vmin, vmax, vmin, vmax)
+            plwind(0.0, 1.0, 0.0, 1.0)
+            plbox("bc", 0.0, 0, "bc", 0.0, 0)
+            vmin = vmin + 0.1
+            vmax = vmax - 0.1
+        plwidth(1)
+        plptex(0.5, 0.5, 1.0, 0.0, 0.5, `i`)
 
 # Demonstrate multiple windows and default color map 0 palette.
 def demo1():

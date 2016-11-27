@@ -140,7 +140,7 @@ def potential():
     ncollin = 11
     ncolbox = 1
     ncollab = 2
-		
+                
     #Finally start plotting this page!
     pladv(0)
     plcol0(ncolbox)
@@ -203,7 +203,7 @@ def main():
     xg0t.shape = (-1,1)
     xg2 = xg0t + distort*cos_x*cos_y
     yg2 = yg0 - distort*cos_x*cos_y
-	
+        
     # Plot using mypltr (scaled identity) transformation used to create
     # xg0 and yg0
 #    pl_setcontlabelparam(0.006, 0.3, 0.1, 0)

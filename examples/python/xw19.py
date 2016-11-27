@@ -38,8 +38,8 @@ def mapform19(n, x, y):
         radius = 90.0 - y[i]
         xp = radius * cos(x[i] * pi / 180.0)
         yp = radius * sin(x[i] * pi / 180.0)
-	x[i] = xp
-	y[i] = yp
+        x[i] = xp
+        y[i] = yp
     return [x,y]
 
 ## "Normalize" longitude values so that they always fall between -180.0 and

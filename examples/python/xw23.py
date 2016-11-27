@@ -207,46 +207,46 @@ weight = (
 def main():
 
     for page in range(11):
-	pladv(0)
+        pladv(0)
 
-	# Set up viewport and window
+        # Set up viewport and window
 
-	plvpor(0.02, 0.98, 0.02, 0.90)
-	plwind(0.0, 1.0, 0.0, 1.0)
-	mm = plgspa()
-	plschr(0., 0.8)
-	ycharacter_scale = (1.0 - 0.0)/(mm[3]-mm[2])
-	# Factor should be 0.5, but heuristically it turns out to be larger.
-	yoffset = 1.0*plgchr()[1]*ycharacter_scale
+        plvpor(0.02, 0.98, 0.02, 0.90)
+        plwind(0.0, 1.0, 0.0, 1.0)
+        mm = plgspa()
+        plschr(0., 0.8)
+        ycharacter_scale = (1.0 - 0.0)/(mm[3]-mm[2])
+        # Factor should be 0.5, but heuristically it turns out to be larger.
+        yoffset = 1.0*plgchr()[1]*ycharacter_scale
 
-	# Draw the grid using plbox
+        # Draw the grid using plbox
 
-	plcol0(2)
-	deltax = 1./float(nxcells[page])
-	deltay = 1./float(nycells[page])
-	plbox("bcg", deltax, 0, "bcg", deltay, 0)
-	plcol0(15)
-	length = int(hi[page],16) - int(lo[page],16)
-	slice = 0
-	for y in (0.5+arange(nycells[page]-1,-1,-1))*deltay:
-	    for x in (0.5+arange(nxcells[page]))*deltax:
-		if slice < length:
-	            if page == 0:
-		        # Greek letters.
-		        CommandString = str(Greek[slice]);
-	            elif 1 <= page and page <= 3:
-	    		# Unicode for Type 1 Symbol Glyphs.
-			CommandString = "#[" + str(Type1\
-	    		[offset[page]+slice]) + "]"
-		    elif page >= 4:
-			CommandString = "#[" + hex(int(lo[page],16)+slice) + "]"
-		    plptex(x,y+yoffset,1.,0.,0.5, CommandString)
-		    plptex(x,y-yoffset,1.,0.,0.5, "#" +CommandString)
-		slice += 1
+        plcol0(2)
+        deltax = 1./float(nxcells[page])
+        deltay = 1./float(nycells[page])
+        plbox("bcg", deltax, 0, "bcg", deltay, 0)
+        plcol0(15)
+        length = int(hi[page],16) - int(lo[page],16)
+        slice = 0
+        for y in (0.5+arange(nycells[page]-1,-1,-1))*deltay:
+            for x in (0.5+arange(nxcells[page]))*deltax:
+                if slice < length:
+                    if page == 0:
+                        # Greek letters.
+                        CommandString = str(Greek[slice]);
+                    elif 1 <= page and page <= 3:
+                        # Unicode for Type 1 Symbol Glyphs.
+                        CommandString = "#[" + str(Type1\
+                        [offset[page]+slice]) + "]"
+                    elif page >= 4:
+                        CommandString = "#[" + hex(int(lo[page],16)+slice) + "]"
+                    plptex(x,y+yoffset,1.,0.,0.5, CommandString)
+                    plptex(x,y-yoffset,1.,0.,0.5, "#" +CommandString)
+                slice += 1
 
-	plschr(0., 1.0)
-	# Page title
-	plmtex("t", 1.5, 0.5, 0.5, title[page])
+        plschr(0., 1.0)
+        # Page title
+        plmtex("t", 1.5, 0.5, 0.5, title[page])
 
     # Demonstrate methods of getting the current fonts
 
@@ -274,7 +274,7 @@ def main():
         elif(page == 14):
             plmtex("t", 1.5, 0.5, 0.5,"#<0x10>PLplot Example 23 - Set Font with ##<0xmn> constructs")
         elif(page == 15):
-	  plmtex("t", 1.5, 0.5, 0.5,"#<0x10>PLplot Example 23 - Set Font with ##<FCI COMMAND STRING/> constructs")
+          plmtex("t", 1.5, 0.5, 0.5,"#<0x10>PLplot Example 23 - Set Font with ##<FCI COMMAND STRING/> constructs")
         plschr(0., 0.75)
         for i in range(0,FCI_COMBINATIONS):
             family_index = i % 5

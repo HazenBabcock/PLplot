@@ -37,21 +37,21 @@ def main():
 
     # Draw circles for polar grid
     for i in range(10):
-	plarc(0.0, 0.0, 0.1*(i+1), 0.1*(i+1), 0.0, 360.0, 0.0, 0)
+        plarc(0.0, 0.0, 0.1*(i+1), 0.1*(i+1), 0.0, 360.0, 0.0, 0)
 
     plcol0(2)
     for i in range(12):
-	theta = 30.0 * i
-	dx = cos(dtr * theta)
-	dy = sin(dtr * theta)
+        theta = 30.0 * i
+        dx = cos(dtr * theta)
+        dy = sin(dtr * theta)
 
-	# Draw radial spokes for polar grid
+        # Draw radial spokes for polar grid
 
-	pljoin(0.0, 0.0, dx, dy)
+        pljoin(0.0, 0.0, dx, dy)
 
-	# Write labels for angle
+        # Write labels for angle
 
-	text = `int(theta)`
+        text = `int(theta)`
         if theta < 9.99:
             offset = 0.45
         elif theta < 99.9:
@@ -59,10 +59,10 @@ def main():
         else:
             offset = 0.15
 #Slightly off zero to avoid floating point logic flips at 90 and 270 deg.
-	if dx >= -0.00001:
-	    plptex(dx, dy, dx, dy, -offset, text)
-	else:
-	    plptex(dx, dy, -dx, -dy, 1.+offset, text)
+        if dx >= -0.00001:
+            plptex(dx, dy, dx, dy, -offset, text)
+        else:
+            plptex(dx, dy, -dx, -dy, 1.+offset, text)
 
     # Draw the graph
 

@@ -78,56 +78,56 @@ def main():
     # z = zmin.
     plschr(0., 1.0)
     for i in range(NREVOLUTION):
-	omega = 2.*pi*(float(i)/float(NREVOLUTION))
-	sin_omega = sin(omega)
-	cos_omega = cos(omega)
-	x_inclination = 0.5*xrange*cos_omega
-	y_inclination = 0.5*yrange*sin_omega
-	z_inclination = 0.
-	x_shear = -0.5*xrange*sin_omega
-	y_shear = 0.5*yrange*cos_omega
-	z_shear = 0.
-	plptex3(
-	xmid, ymid, zmin,
-	x_inclination, y_inclination, z_inclination,
-	x_shear, y_shear, z_shear,
-	0.0, "  revolution")
+        omega = 2.*pi*(float(i)/float(NREVOLUTION))
+        sin_omega = sin(omega)
+        cos_omega = cos(omega)
+        x_inclination = 0.5*xrange*cos_omega
+        y_inclination = 0.5*yrange*sin_omega
+        z_inclination = 0.
+        x_shear = -0.5*xrange*sin_omega
+        y_shear = 0.5*yrange*cos_omega
+        z_shear = 0.
+        plptex3(
+        xmid, ymid, zmin,
+        x_inclination, y_inclination, z_inclination,
+        x_shear, y_shear, z_shear,
+        0.0, "  revolution")
 
     # x = xmax.
     plschr(0., 1.0)
     for i in range(NREVOLUTION):
-	omega = 2.*pi*(float(i)/float(NREVOLUTION))
-	sin_omega = sin(omega)
-	cos_omega = cos(omega)
-	x_inclination = 0.
-	y_inclination = -0.5*yrange*cos_omega
-	z_inclination = 0.5*zrange*sin_omega
-	x_shear = 0.
-	y_shear = 0.5*yrange*sin_omega
-	z_shear = 0.5*zrange*cos_omega
-	plptex3(
-	xmax, ymid, zmid,
-	x_inclination, y_inclination, z_inclination,
-	x_shear, y_shear, z_shear,
-	0.0, "  revolution")
+        omega = 2.*pi*(float(i)/float(NREVOLUTION))
+        sin_omega = sin(omega)
+        cos_omega = cos(omega)
+        x_inclination = 0.
+        y_inclination = -0.5*yrange*cos_omega
+        z_inclination = 0.5*zrange*sin_omega
+        x_shear = 0.
+        y_shear = 0.5*yrange*sin_omega
+        z_shear = 0.5*zrange*cos_omega
+        plptex3(
+        xmax, ymid, zmid,
+        x_inclination, y_inclination, z_inclination,
+        x_shear, y_shear, z_shear,
+        0.0, "  revolution")
 
     # y = ymax.
     plschr(0., 1.0)
     for i in range(NREVOLUTION):
-	omega = 2.*pi*(float(i)/float(NREVOLUTION))
-	sin_omega = sin(omega)
-	cos_omega = cos(omega)
-	x_inclination = 0.5*xrange*cos_omega
-	y_inclination = 0.
-	z_inclination = 0.5*zrange*sin_omega
-	x_shear = -0.5*xrange*sin_omega
-	y_shear = 0.
-	z_shear = 0.5*zrange*cos_omega
-	plptex3(
-	xmid, ymax, zmid,
-	x_inclination, y_inclination, z_inclination,
-	x_shear, y_shear, z_shear,
-	0.0, "  revolution")
+        omega = 2.*pi*(float(i)/float(NREVOLUTION))
+        sin_omega = sin(omega)
+        cos_omega = cos(omega)
+        x_inclination = 0.5*xrange*cos_omega
+        y_inclination = 0.
+        z_inclination = 0.5*zrange*sin_omega
+        x_shear = -0.5*xrange*sin_omega
+        y_shear = 0.
+        z_shear = 0.5*zrange*cos_omega
+        plptex3(
+        xmid, ymax, zmid,
+        x_inclination, y_inclination, z_inclination,
+        x_shear, y_shear, z_shear,
+        0.0, "  revolution")
     # Draw minimal 3D grid to finish defining the 3D box.
     plmesh(x, y, z, DRAW_LINEXY)
 
@@ -151,17 +151,17 @@ def main():
     z_inclination = 0.
     x_shear = 0.
     for i in range(NROTATION):
-	omega = 2.*pi*(float(i)/float(NROTATION))
-	sin_omega = sin(omega)
-	cos_omega = cos(omega)
-	y_shear = 0.5*yrange*sin_omega
-	z_shear = 0.5*zrange*cos_omega
+        omega = 2.*pi*(float(i)/float(NROTATION))
+        sin_omega = sin(omega)
+        cos_omega = cos(omega)
+        y_shear = 0.5*yrange*sin_omega
+        z_shear = 0.5*zrange*cos_omega
         zs = zsmax - dzsrot * float(i)
-	plptex3(
-	xmid, ymax, zs,
-	x_inclination, y_inclination, z_inclination,
-	x_shear, y_shear, z_shear,
-	0.5, "rotation for y = y#dmax#u")
+        plptex3(
+        xmid, ymax, zs,
+        x_inclination, y_inclination, z_inclination,
+        x_shear, y_shear, z_shear,
+        0.5, "rotation for y = y#dmax#u")
 
     # x = xmax.
     plschr(0., 1.0)
@@ -170,17 +170,17 @@ def main():
     z_inclination = 0.
     y_shear = 0.
     for i in range(NROTATION):
-	omega = 2.*pi*(float(i)/float(NROTATION))
-	sin_omega = sin(omega)
-	cos_omega = cos(omega)
-	x_shear = 0.5*xrange*sin_omega
-	z_shear = 0.5*zrange*cos_omega
+        omega = 2.*pi*(float(i)/float(NROTATION))
+        sin_omega = sin(omega)
+        cos_omega = cos(omega)
+        x_shear = 0.5*xrange*sin_omega
+        z_shear = 0.5*zrange*cos_omega
         zs = zsmax - dzsrot * float(i)
-	plptex3(
-	xmax, ymid, zs,
-	x_inclination, y_inclination, z_inclination,
-	x_shear, y_shear, z_shear,
-	0.5, "rotation for x = x#dmax#u")
+        plptex3(
+        xmax, ymid, zs,
+        x_inclination, y_inclination, z_inclination,
+        x_shear, y_shear, z_shear,
+        0.5, "rotation for x = x#dmax#u")
 
     # z = zmin.
     plschr(0., 1.0)
@@ -189,17 +189,17 @@ def main():
     z_inclination = 0.
     x_shear = 0.
     for i in range(NROTATION):
-	omega = 2.*pi*(float(i)/float(NROTATION))
-	sin_omega = sin(omega)
-	cos_omega = cos(omega)
-	y_shear = 0.5*yrange*cos_omega
-	z_shear = 0.5*zrange*sin_omega
+        omega = 2.*pi*(float(i)/float(NROTATION))
+        sin_omega = sin(omega)
+        cos_omega = cos(omega)
+        y_shear = 0.5*yrange*cos_omega
+        z_shear = 0.5*zrange*sin_omega
         ys = ysmax - dysrot * float(i)
-	plptex3(
-	xmid, ys, zmin,
-	x_inclination, y_inclination, z_inclination,
-	x_shear, y_shear, z_shear,
-	0.5, "rotation for z = z#dmin#u")
+        plptex3(
+        xmid, ys, zmin,
+        x_inclination, y_inclination, z_inclination,
+        x_shear, y_shear, z_shear,
+        0.5, "rotation for z = z#dmin#u")
 
     # Draw minimal 3D grid to finish defining the 3D box.
     plmesh(x, y, z, DRAW_LINEXY)
@@ -228,17 +228,17 @@ def main():
     z_inclination = 0.
     y_shear = 0.
     for i in range(NSHEAR):
-	omega = domega + 2.*pi*(float(i)/float(NSHEAR))
-	sin_omega = sin(omega)
-	cos_omega = cos(omega)
-	x_shear = 0.5*xrange*sin_omega
-	z_shear = 0.5*zrange*cos_omega
+        omega = domega + 2.*pi*(float(i)/float(NSHEAR))
+        sin_omega = sin(omega)
+        cos_omega = cos(omega)
+        x_shear = 0.5*xrange*sin_omega
+        z_shear = 0.5*zrange*cos_omega
         zs = zsmax - dzsshear * float(i)
-	plptex3(
-	xmid, ymax, zs,
-	x_inclination, y_inclination, z_inclination,
-	x_shear, y_shear, z_shear,
-	0.5, "shear for y = y#dmax#u")
+        plptex3(
+        xmid, ymax, zs,
+        x_inclination, y_inclination, z_inclination,
+        x_shear, y_shear, z_shear,
+        0.5, "shear for y = y#dmax#u")
 
     # x = xmax.
     plschr(0., 1.0)
@@ -247,17 +247,17 @@ def main():
     z_inclination = 0.
     x_shear = 0.
     for i in range(NSHEAR):
-	omega = domega + 2.*pi*(float(i)/float(NSHEAR))
-	sin_omega = sin(omega)
-	cos_omega = cos(omega)
-	y_shear = -0.5*yrange*sin_omega
-	z_shear = 0.5*zrange*cos_omega
+        omega = domega + 2.*pi*(float(i)/float(NSHEAR))
+        sin_omega = sin(omega)
+        cos_omega = cos(omega)
+        y_shear = -0.5*yrange*sin_omega
+        z_shear = 0.5*zrange*cos_omega
         zs = zsmax - dzsshear * float(i)
-	plptex3(
-	xmax, ymid, zs,
-	x_inclination, y_inclination, z_inclination,
-	x_shear, y_shear, z_shear,
-	0.5, "shear for x = x#dmax#u")
+        plptex3(
+        xmax, ymid, zs,
+        x_inclination, y_inclination, z_inclination,
+        x_shear, y_shear, z_shear,
+        0.5, "shear for x = x#dmax#u")
 
     # z = zmin.
     plschr(0., 1.0)
@@ -266,17 +266,17 @@ def main():
     z_inclination = 0.
     z_shear = 0.
     for i in range(NSHEAR):
-	omega = domega + 2.*pi*(float(i)/float(NSHEAR))
-	sin_omega = sin(omega)
-	cos_omega = cos(omega)
-	y_shear = 0.5*yrange*cos_omega
-	x_shear = 0.5*xrange*sin_omega
+        omega = domega + 2.*pi*(float(i)/float(NSHEAR))
+        sin_omega = sin(omega)
+        cos_omega = cos(omega)
+        y_shear = 0.5*yrange*cos_omega
+        x_shear = 0.5*xrange*sin_omega
         ys = ysmax - dysshear * float(i)
-	plptex3(
-	xmid, ys, zmin,
-	x_inclination, y_inclination, z_inclination,
-	x_shear, y_shear, z_shear,
-	0.5, "shear for z = z#dmin#u")
+        plptex3(
+        xmid, ys, zmin,
+        x_inclination, y_inclination, z_inclination,
+        x_shear, y_shear, z_shear,
+        0.5, "shear for z = z#dmin#u")
 
     # Draw minimal 3D grid to finish defining the 3D box.
     plmesh(x, y, z, DRAW_LINEXY)
@@ -303,28 +303,28 @@ def main():
     radius = 0.5
     pitch = 1./(2.*pi)
     for character in pstring:
-	sin_omega = sin(omega)
-	cos_omega = cos(omega)
-	xpos = xmid + radius*sin_omega
-	ypos = ymid - radius*cos_omega
-	zpos = zmin + pitch*omega
-	# In general, the inclination is proportional to the derivative of
-	# the position wrt theta.
-	x_inclination = radius*cos_omega
-	y_inclination = radius*sin_omega
-	z_inclination = pitch
-	# The shear vector should be perpendicular to the 3D line with Z
-	# component maximized, but for low pitch a good approximation is
-	# a constant vector that is parallel to the Z axis.
-	x_shear = 0.
-	y_shear = 0.
-	z_shear = 1.
-	plptex3(
-	xpos, ypos, zpos,
-	x_inclination, y_inclination, z_inclination,
-	x_shear, y_shear, z_shear,
-	0.5, character)
-	omega += domega
+        sin_omega = sin(omega)
+        cos_omega = cos(omega)
+        xpos = xmid + radius*sin_omega
+        ypos = ymid - radius*cos_omega
+        zpos = zmin + pitch*omega
+        # In general, the inclination is proportional to the derivative of
+        # the position wrt theta.
+        x_inclination = radius*cos_omega
+        y_inclination = radius*sin_omega
+        z_inclination = pitch
+        # The shear vector should be perpendicular to the 3D line with Z
+        # component maximized, but for low pitch a good approximation is
+        # a constant vector that is parallel to the Z axis.
+        x_shear = 0.
+        y_shear = 0.
+        z_shear = 1.
+        plptex3(
+        xpos, ypos, zpos,
+        x_inclination, y_inclination, z_inclination,
+        x_shear, y_shear, z_shear,
+        0.5, character)
+        omega += domega
 
     # Draw minimal 3D grid to finish defining the 3D box.
     plmesh(x, y, z, DRAW_LINEXY)
@@ -356,5 +356,5 @@ def main():
     plmtex3("zs", -1.0, 0.5, 0.5, "secondary Z-axis label")
     # Draw minimal 3D grid to finish defining the 3D box.
     plmesh(x, y, z, DRAW_LINEXY)
-	
+        
 main()
