@@ -52,7 +52,7 @@ def plot1(type):
     elif type == 1:
 	plbox("bcfghlnst", 0.0, 0, "bcghnstv", 0.0, 0)
     else:
-	print "error: type must be either 0 or 1"
+	print("error: type must be either 0 or 1")
     plcol0(2)
     plline(freql, ampl)
     plcol0(2)

@@ -44,7 +44,7 @@ def main(w):
 ##
 ##	# Get version number, just for kicks
 ##
-##	print "PLplot library version:", pl.gver()
+##	print("PLplot library version:", pl.gver())
 ##
 ##	# Initialize plplot
 ##
@@ -84,10 +84,10 @@ def main(w):
 ##		plc = pl.GetCursor()
 ##		if len(plc) == 4:
 ##			pl.text()
-##			print " wx =", plc[2]
-##			print " wy =", plc[3]
-##			print " vx =", plc[0]
-##			print " vy =", plc[1]
+##			print(" wx =", plc[2])
+##			print(" wy =", plc[3])
+##			print(" vx =", plc[0])
+##			print(" vy =", plc[1])
 ##			pl.gra()
 ##			continue
 ##		else:

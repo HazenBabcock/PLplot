@@ -45,7 +45,7 @@ def main(w):
     zmin = min(min(zz))
     zmax = max(max(zz))
 
-    print "zmin=", zmin, " zmax=", zmax
+    print("zmin=", zmin, " zmax=", zmax)
 
     for i in range(ns):
 	clevel[i] = zmin + (zmax - zmin) * (i+.5)/ns

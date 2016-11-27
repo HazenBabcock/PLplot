@@ -51,6 +51,6 @@ plend()
 
 if len(failed) != 0:
     import string
-    print "Failed script(s): " + string.join(failed,", ")
+    print("Failed script(s): " + string.join(failed,", "))
     sys.exit(1)
 

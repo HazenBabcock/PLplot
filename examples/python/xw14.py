@@ -42,9 +42,9 @@ def main():
     driver = plgdev()
     (fam, num, bmax) = plgfam()
 
-    print "Demo of multiple output streams via the %s driver." % driver
-    print "Running with the second stream as slave to the first."
-    print ""
+    print("Demo of multiple output streams via the %s driver." % driver)
+    print("Running with the second stream as slave to the first.")
+    print("")
 
     # Set up the first stream.
     plsetopt("geometry", geometry_master)
