@@ -56,104 +56,104 @@ _plcont = plcont
 def plcont(z, *args):
     z = numpy.asarray(z)
     if len(z.shape) != 2:
-	raise ValueError("Expected 2D z array")
+        raise ValueError("Expected 2D z array")
 
     if len(args) > 4 and type(args[0]) == types.IntType:
-	for i in range(1,4):
-	    if type(args[i]) != types.IntType:
-		raise ValueError("Expected 4 ints for kx,lx,ky,ly")
+        for i in range(1,4):
+            if type(args[i]) != types.IntType:
+                raise ValueError("Expected 4 ints for kx,lx,ky,ly")
 
-	else:
-	    # these 4 args are the kx, lx, ky, ly ints
-	    ifdefault_range = 0
-	    kx,lx,ky,ly = args[0:4]
-	    args = args[4:]
+        else:
+            # these 4 args are the kx, lx, ky, ly ints
+            ifdefault_range = 0
+            kx,lx,ky,ly = args[0:4]
+            args = args[4:]
     else:
-	ifdefault_range = 1
+        ifdefault_range = 1
 
     if len(args) > 0:
-	clev = numpy.asarray(args[0])
-	if len(clev.shape) !=1:
-	    raise ValueError("Expected 1D clev array")
-	args = args[1:]
+        clev = numpy.asarray(args[0])
+        if len(clev.shape) !=1:
+            raise ValueError("Expected 1D clev array")
+        args = args[1:]
     else:
-	raise ValueError("Missing clev argument")
+        raise ValueError("Missing clev argument")
 
     if len(args) > 0 and ( \
     type(args[0]) == types.StringType or \
     type(args[0]) == types.FunctionType or \
     type(args[0]) == types.BuiltinFunctionType):
-	pltr = args[0]
-	# Handle the string names for the callbacks though specifying the
-	# built-in function name directly (without the surrounding quotes)
-	# or specifying any user-defined transformation function
-	# (following above rules) works fine too.
-	if type(pltr) == types.StringType:
-	    if pltr == "pltr0":
-		pltr = pltr0
-	    elif pltr == "pltr1":
-		pltr = pltr1
-	    elif pltr == "pltr2":
-		pltr = pltr2
-	    else:
-		raise ValueError("pltr string is unrecognized")
+        pltr = args[0]
+        # Handle the string names for the callbacks though specifying the
+        # built-in function name directly (without the surrounding quotes)
+        # or specifying any user-defined transformation function
+        # (following above rules) works fine too.
+        if type(pltr) == types.StringType:
+            if pltr == "pltr0":
+                pltr = pltr0
+            elif pltr == "pltr1":
+                pltr = pltr1
+            elif pltr == "pltr2":
+                pltr = pltr2
+            else:
+                raise ValueError("pltr string is unrecognized")
 
-	args = args[1:]
-	# Handle pltr_data or separate xg, yg, [wrap]
-	if len(args) == 0:
-	    # Default pltr_data
-	    pltr_data = None
-	elif len(args) == 1:
-	    #Must be pltr_data
-	    pltr_data = args[0]
-	    args = args[1:]
-	elif len(args) >= 2:
-	    xg = numpy.asarray(args[0])
-	    if len(xg.shape) < 1 or len(xg.shape) > 2:
-		raise ValueError("xg must be 1D or 2D array")
-	    yg = numpy.asarray(args[1])
-	    if len(yg.shape) != len(xg.shape):
-		raise ValueError("yg must have same number of dimensions as xg")
-	    args = args[2:]
-	    # wrap only relevant if xg and yg specified.
-	    if len(args) > 0:
-	     if type(args[0]) == types.IntType:
-	      wrap = args[0]
-	      args = args[1:]
-	      if len(xg.shape) == 2 and len(yg.shape) == 2 and  \
-	      z.shape == xg.shape and z.shape == yg.shape:
-		# handle wrap
-		if wrap == 1:
-		    z = numpy.resize(z, (z.shape[0]+1, z.shape[1]))
-		    xg = numpy.resize(xg, (xg.shape[0]+1, xg.shape[1]))
-		    yg = numpy.resize(yg, (yg.shape[0]+1, yg.shape[1]))
-		elif wrap == 2:
-		    z = numpy.transpose(numpy.resize( \
-		    numpy.transpose(z), (z.shape[1]+1, z.shape[0])))
-		    xg = numpy.transpose(numpy.resize( \
-		    numpy.transpose(xg), (xg.shape[1]+1, xg.shape[0])))
-		    yg = numpy.transpose(numpy.resize( \
-		    numpy.transpose(yg), (yg.shape[1]+1, yg.shape[0])))
-		elif wrap != 0:
-		    raise ValueError("Invalid wrap specifier, must be 0, 1 or 2.")
-	      elif wrap != 0:
-		  raise ValueError("Non-zero wrap specified and xg and yg are not 2D arrays")
-	     else:
-		 raise ValueError("Specified wrap is not an integer")
-	    pltr_data = (xg, yg)
+        args = args[1:]
+        # Handle pltr_data or separate xg, yg, [wrap]
+        if len(args) == 0:
+            # Default pltr_data
+            pltr_data = None
+        elif len(args) == 1:
+            #Must be pltr_data
+            pltr_data = args[0]
+            args = args[1:]
+        elif len(args) >= 2:
+            xg = numpy.asarray(args[0])
+            if len(xg.shape) < 1 or len(xg.shape) > 2:
+                raise ValueError("xg must be 1D or 2D array")
+            yg = numpy.asarray(args[1])
+            if len(yg.shape) != len(xg.shape):
+                raise ValueError("yg must have same number of dimensions as xg")
+            args = args[2:]
+            # wrap only relevant if xg and yg specified.
+            if len(args) > 0:
+             if type(args[0]) == types.IntType:
+              wrap = args[0]
+              args = args[1:]
+              if len(xg.shape) == 2 and len(yg.shape) == 2 and  \
+              z.shape == xg.shape and z.shape == yg.shape:
+                # handle wrap
+                if wrap == 1:
+                    z = numpy.resize(z, (z.shape[0]+1, z.shape[1]))
+                    xg = numpy.resize(xg, (xg.shape[0]+1, xg.shape[1]))
+                    yg = numpy.resize(yg, (yg.shape[0]+1, yg.shape[1]))
+                elif wrap == 2:
+                    z = numpy.transpose(numpy.resize( \
+                    numpy.transpose(z), (z.shape[1]+1, z.shape[0])))
+                    xg = numpy.transpose(numpy.resize( \
+                    numpy.transpose(xg), (xg.shape[1]+1, xg.shape[0])))
+                    yg = numpy.transpose(numpy.resize( \
+                    numpy.transpose(yg), (yg.shape[1]+1, yg.shape[0])))
+                elif wrap != 0:
+                    raise ValueError("Invalid wrap specifier, must be 0, 1 or 2.")
+              elif wrap != 0:
+                  raise ValueError("Non-zero wrap specified and xg and yg are not 2D arrays")
+             else:
+                 raise ValueError("Specified wrap is not an integer")
+            pltr_data = (xg, yg)
     else:
-	# default is identity transformation
-	pltr = pltr0
-	pltr_data = None
+        # default is identity transformation
+        pltr = pltr0
+        pltr_data = None
     if len(args) > 0:
-	raise ValueError("Too many arguments for plcont")
+        raise ValueError("Too many arguments for plcont")
     if ifdefault_range:
-	# Default is to take full range (still using fortran convention
-	# for indices which is embedded in the PLplot library API)
-	kx = 1
-	lx = z.shape[0]
-	ky = 1
-	ly = z.shape[1]
+        # Default is to take full range (still using fortran convention
+        # for indices which is embedded in the PLplot library API)
+        kx = 1
+        lx = z.shape[0]
+        ky = 1
+        ly = z.shape[1]
     _plcont(z, kx, lx, ky, ly, clev, pltr, pltr_data)
 plcont.__doc__ = _plcont.__doc__
 
@@ -359,127 +359,127 @@ _plshades = plshades
 def plshades(z, *args):
     z = numpy.asarray(z)
     if len(z.shape) != 2:
-	raise ValueError("Expected 2D z array")
+        raise ValueError("Expected 2D z array")
 
     if len(args) > 4 and \
     (type(args[0]) == types.FloatType or type(args[0]) == numpy.float64 or type(args[0]) == types.IntType) and \
     (type(args[1]) == types.FloatType or type(args[1]) == numpy.float64 or type(args[1]) == types.IntType) and \
     (type(args[2]) == types.FloatType or type(args[2]) == numpy.float64 or type(args[2]) == types.IntType) and \
     (type(args[3]) == types.FloatType or type(args[3]) == numpy.float64 or type(args[3]) == types.IntType):
-	# These 4 args are xmin, xmax, ymin, ymax
-	xmin, xmax, ymin, ymax = args[0:4]
-	args = args[4:]
+        # These 4 args are xmin, xmax, ymin, ymax
+        xmin, xmax, ymin, ymax = args[0:4]
+        args = args[4:]
     else:
-	# These values are ignored if pltr and pltr_data are defined in any case.
-	# So pick some convenient defaults that work for the pltr0, None case
-	xmin = -1.
-	xmax = 1.
-	ymin = -1.
-	ymax = 1.
+        # These values are ignored if pltr and pltr_data are defined in any case.
+        # So pick some convenient defaults that work for the pltr0, None case
+        xmin = -1.
+        xmax = 1.
+        ymin = -1.
+        ymax = 1.
 
     # clev must be present.
     if len(args) > 0:
-	clev = numpy.asarray(args[0])
-	if len(clev.shape) !=1:
-	    raise ValueError("Expected 1D clev array")
-	args = args[1:]
+        clev = numpy.asarray(args[0])
+        if len(clev.shape) !=1:
+            raise ValueError("Expected 1D clev array")
+        args = args[1:]
     else:
-	raise ValueError("Missing clev argument")
+        raise ValueError("Missing clev argument")
 
     # fill_width must be present
     if len(args) > 0 and (type(args[0]) == types.FloatType or type(args[0]) == numpy.float64):
-	fill_width = args[0]
-	args = args[1:]
+        fill_width = args[0]
+        args = args[1:]
     else:
-	raise ValueError("fill_width argument must be present and of types.FloatType or numpy.float64 type")
+        raise ValueError("fill_width argument must be present and of types.FloatType or numpy.float64 type")
 
     # cont_color and cont_width are optional.
     if len(args) > 2 and \
     type(args[0]) == types.IntType and \
     (type(args[1]) == types.FloatType or type(args[1]) == numpy.float64):
-	# These 2 args are
-	cont_color, cont_width = args[0:2]
-	args = args[2:]
+        # These 2 args are
+        cont_color, cont_width = args[0:2]
+        args = args[2:]
     else:
-	# Turn off contouring.
-	cont_color, cont_width = (0,0.)
+        # Turn off contouring.
+        cont_color, cont_width = (0,0.)
 
     # rect must be present.
     if len(args) > 0 and type(args[0]) == types.IntType:
-	rect = args[0]
-	args = args[1:]
+        rect = args[0]
+        args = args[1:]
     else:
-	raise ValueError("Missing rect argument")
+        raise ValueError("Missing rect argument")
 
     if len(args) > 0 and ( \
     type(args[0]) == types.NoneType or \
     type(args[0]) == types.StringType or \
     type(args[0]) == types.FunctionType or \
     type(args[0]) == types.BuiltinFunctionType):
-	pltr = args[0]
-	# Handle the string names for the callbacks though specifying the
-	# built-in function name directly (without the surrounding quotes)
-	# or specifying any user-defined transformation function
-	# (following above rules) works fine too.
-	if type(pltr) == types.StringType:
-	    if pltr == "pltr0":
-		pltr = pltr0
-	    elif pltr == "pltr1":
-		pltr = pltr1
-	    elif pltr == "pltr2":
-		pltr = pltr2
-	    else:
-		raise ValueError("pltr string is unrecognized")
+        pltr = args[0]
+        # Handle the string names for the callbacks though specifying the
+        # built-in function name directly (without the surrounding quotes)
+        # or specifying any user-defined transformation function
+        # (following above rules) works fine too.
+        if type(pltr) == types.StringType:
+            if pltr == "pltr0":
+                pltr = pltr0
+            elif pltr == "pltr1":
+                pltr = pltr1
+            elif pltr == "pltr2":
+                pltr = pltr2
+            else:
+                raise ValueError("pltr string is unrecognized")
 
-	args = args[1:]
-	# Handle pltr_data or separate xg, yg, [wrap]
-	if len(args) == 0:
-	    # Default pltr_data
-	    pltr_data = None
-	elif len(args) == 1:
-	    #Must be pltr_data
-	    pltr_data = args[0]
-	    args = args[1:]
-	elif len(args) >= 2:
-	    xg = numpy.asarray(args[0])
-	    if len(xg.shape) < 1 or len(xg.shape) > 2:
-		raise ValueError("xg must be 1D or 2D array")
-	    yg = numpy.asarray(args[1])
-	    if len(yg.shape) != len(xg.shape):
-		raise ValueError("yg must have same number of dimensions as xg")
-	    args = args[2:]
-	    # wrap only relevant if xg and yg specified.
-	    if len(args) > 0:
-	     if type(args[0]) == types.IntType:
-	      wrap = args[0]
-	      args = args[1:]
-	      if len(xg.shape) == 2 and len(yg.shape) == 2 and  \
-	      z.shape == xg.shape and z.shape == yg.shape:
-		# handle wrap
-		if wrap == 1:
-		    z = numpy.resize(z, (z.shape[0]+1, z.shape[1]))
-		    xg = numpy.resize(xg, (xg.shape[0]+1, xg.shape[1]))
-		    yg = numpy.resize(yg, (yg.shape[0]+1, yg.shape[1]))
-		elif wrap == 2:
-		    z = numpy.transpose(numpy.resize( \
-		    numpy.transpose(z), (z.shape[1]+1, z.shape[0])))
-		    xg = numpy.transpose(numpy.resize( \
-		    numpy.transpose(xg), (xg.shape[1]+1, xg.shape[0])))
-		    yg = numpy.transpose(numpy.resize( \
-		    numpy.transpose(yg), (yg.shape[1]+1, yg.shape[0])))
-		elif wrap != 0:
-		    raise ValueError("Invalid wrap specifier, must be 0, 1 or 2.")
-	      elif wrap != 0:
-		  raise ValueError("Non-zero wrap specified and xg and yg are not 2D arrays")
-	     else:
-		 raise ValueError("Specified wrap is not an integer")
-	    pltr_data = (xg, yg)
+        args = args[1:]
+        # Handle pltr_data or separate xg, yg, [wrap]
+        if len(args) == 0:
+            # Default pltr_data
+            pltr_data = None
+        elif len(args) == 1:
+            #Must be pltr_data
+            pltr_data = args[0]
+            args = args[1:]
+        elif len(args) >= 2:
+            xg = numpy.asarray(args[0])
+            if len(xg.shape) < 1 or len(xg.shape) > 2:
+                raise ValueError("xg must be 1D or 2D array")
+            yg = numpy.asarray(args[1])
+            if len(yg.shape) != len(xg.shape):
+                raise ValueError("yg must have same number of dimensions as xg")
+            args = args[2:]
+            # wrap only relevant if xg and yg specified.
+            if len(args) > 0:
+             if type(args[0]) == types.IntType:
+              wrap = args[0]
+              args = args[1:]
+              if len(xg.shape) == 2 and len(yg.shape) == 2 and  \
+              z.shape == xg.shape and z.shape == yg.shape:
+                # handle wrap
+                if wrap == 1:
+                    z = numpy.resize(z, (z.shape[0]+1, z.shape[1]))
+                    xg = numpy.resize(xg, (xg.shape[0]+1, xg.shape[1]))
+                    yg = numpy.resize(yg, (yg.shape[0]+1, yg.shape[1]))
+                elif wrap == 2:
+                    z = numpy.transpose(numpy.resize( \
+                    numpy.transpose(z), (z.shape[1]+1, z.shape[0])))
+                    xg = numpy.transpose(numpy.resize( \
+                    numpy.transpose(xg), (xg.shape[1]+1, xg.shape[0])))
+                    yg = numpy.transpose(numpy.resize( \
+                    numpy.transpose(yg), (yg.shape[1]+1, yg.shape[0])))
+                elif wrap != 0:
+                    raise ValueError("Invalid wrap specifier, must be 0, 1 or 2.")
+              elif wrap != 0:
+                  raise ValueError("Non-zero wrap specified and xg and yg are not 2D arrays")
+             else:
+                 raise ValueError("Specified wrap is not an integer")
+            pltr_data = (xg, yg)
     else:
-	# default is identity transformation
-	pltr = pltr0
-	pltr_data = None
+        # default is identity transformation
+        pltr = pltr0
+        pltr_data = None
     if len(args) > 0:
-	raise ValueError("Too many arguments for plshades")
+        raise ValueError("Too many arguments for plshades")
 
     _plshades(z, xmin, xmax, ymin, ymax, clev, \
     fill_width, cont_color, cont_width, rect, pltr, pltr_data)
@@ -497,7 +497,7 @@ _plshade = plshade
 def plshade(z, *args):
     z = numpy.asarray(z)
     if len(z.shape) != 2:
-	raise ValueError("Expected 2D z array")
+        raise ValueError("Expected 2D z array")
 
     # Extra check on shade_min = float on end is absolutely necessary
     # to unambiguously figure out where we are in the argument list.
@@ -507,16 +507,16 @@ def plshade(z, *args):
     (type(args[2]) == types.FloatType or type(args[2]) == numpy.float64 or type(args[2]) == types.IntType) and \
     (type(args[3]) == types.FloatType or type(args[3]) == numpy.float64 or type(args[3]) == types.IntType) and \
     (type(args[4]) == types.FloatType or type(args[4]) == numpy.float64) :
-	# These 4 args are xmin, xmax, ymin, ymax
-	xmin, xmax, ymin, ymax = args[0:4]
-	args = args[4:]
+        # These 4 args are xmin, xmax, ymin, ymax
+        xmin, xmax, ymin, ymax = args[0:4]
+        args = args[4:]
     else:
-	# These values are ignored if pltr and pltr_data are defined in any case.
-	# So pick some convenient defaults that work for the pltr0, None case
-	xmin = -1.
-	xmax = 1.
-	ymin = -1.
-	ymax = 1.
+        # These values are ignored if pltr and pltr_data are defined in any case.
+        # So pick some convenient defaults that work for the pltr0, None case
+        xmin = -1.
+        xmax = 1.
+        ymin = -1.
+        ymax = 1.
 
     # shade_min, shade_max, sh_cmap, sh_color, sh_width, must be present.
     # sh_color can be either integer or float.
@@ -526,10 +526,10 @@ def plshade(z, *args):
     type(args[2]) == types.IntType and \
     (type(args[3]) == types.FloatType or type(args[3]) == numpy.float64 or type(args[3]) == types.IntType) and \
     (type(args[4]) == types.FloatType or type(args[4]) == numpy.float64):
-	shade_min, shade_max, sh_cmap, sh_color, sh_width = args[0:5]
-	args = args[5:]
+        shade_min, shade_max, sh_cmap, sh_color, sh_width = args[0:5]
+        args = args[5:]
     else:
-	raise ValueError("shade_min, shade_max, sh_cmap, sh_color, sh_width, must be present with sh_cmap of types.IntType type and the rest of types.FloatType or numpy.float64 type")
+        raise ValueError("shade_min, shade_max, sh_cmap, sh_color, sh_width, must be present with sh_cmap of types.IntType type and the rest of types.FloatType or numpy.float64 type")
 
     # min_color, min_width, max_color, max_width are optional.
     if len(args) > 4 and \
@@ -537,89 +537,89 @@ def plshade(z, *args):
     (type(args[1]) == types.FloatType or type(args[1]) == numpy.float64) and \
     type(args[2]) == types.IntType and \
     (type(args[3]) == types.FloatType or type(args[3]) == numpy.float64):
-	# These 4 args are
-	min_color, min_width, max_color, max_width = args[0:4]
-	args = args[4:]
+        # These 4 args are
+        min_color, min_width, max_color, max_width = args[0:4]
+        args = args[4:]
     else:
-	# Turn off boundary colouring
-	min_color, min_width, max_color, max_width = (0,0.,0,0.)
+        # Turn off boundary colouring
+        min_color, min_width, max_color, max_width = (0,0.,0,0.)
 
     # rect must be present.
     if len(args) > 0 and type(args[0]) == types.IntType:
-	rect = args[0]
-	args = args[1:]
+        rect = args[0]
+        args = args[1:]
     else:
-	raise ValueError("Missing rect argument")
+        raise ValueError("Missing rect argument")
 
     if len(args) > 0 and ( \
     type(args[0]) == types.NoneType or \
     type(args[0]) == types.StringType or \
     type(args[0]) == types.FunctionType or \
     type(args[0]) == types.BuiltinFunctionType):
-	pltr = args[0]
-	# Handle the string names for the callbacks though specifying the
-	# built-in function name directly (without the surrounding quotes)
-	# or specifying any user-defined transformation function
-	# (following above rules) works fine too.
-	if type(pltr) == types.StringType:
-	    if pltr == "pltr0":
-		pltr = pltr0
-	    elif pltr == "pltr1":
-		pltr = pltr1
-	    elif pltr == "pltr2":
-		pltr = pltr2
-	    else:
-		raise ValueError("pltr string is unrecognized")
+        pltr = args[0]
+        # Handle the string names for the callbacks though specifying the
+        # built-in function name directly (without the surrounding quotes)
+        # or specifying any user-defined transformation function
+        # (following above rules) works fine too.
+        if type(pltr) == types.StringType:
+            if pltr == "pltr0":
+                pltr = pltr0
+            elif pltr == "pltr1":
+                pltr = pltr1
+            elif pltr == "pltr2":
+                pltr = pltr2
+            else:
+                raise ValueError("pltr string is unrecognized")
 
-	args = args[1:]
-	# Handle pltr_data or separate xg, yg, [wrap]
-	if len(args) == 0:
-	    # Default pltr_data
-	    pltr_data = None
-	elif len(args) == 1:
-	    #Must be pltr_data
-	    pltr_data = args[0]
-	    args = args[1:]
-	elif len(args) >= 2:
-	    xg = numpy.asarray(args[0])
-	    if len(xg.shape) < 1 or len(xg.shape) > 2:
-		raise ValueError("xg must be 1D or 2D array")
-	    yg = numpy.asarray(args[1])
-	    if len(yg.shape) != len(xg.shape):
-		raise ValueError("yg must have same number of dimensions as xg")
-	    args = args[2:]
-	    # wrap only relevant if xg and yg specified.
-	    if len(args) > 0:
-	     if type(args[0]) == types.IntType:
-	      wrap = args[0]
-	      args = args[1:]
-	      if len(xg.shape) == 2 and len(yg.shape) == 2 and  \
-	      z.shape == xg.shape and z.shape == yg.shape:
-		# handle wrap
-		if wrap == 1:
-		    z = numpy.resize(z, (z.shape[0]+1, z.shape[1]))
-		    xg = numpy.resize(xg, (xg.shape[0]+1, xg.shape[1]))
-		    yg = numpy.resize(yg, (yg.shape[0]+1, yg.shape[1]))
-		elif wrap == 2:
-		    z = numpy.transpose(numpy.resize( \
-		    numpy.transpose(z), (z.shape[1]+1, z.shape[0])))
-		    xg = numpy.transpose(numpy.resize( \
-		    numpy.transpose(xg), (xg.shape[1]+1, xg.shape[0])))
-		    yg = numpy.transpose(numpy.resize( \
-		    numpy.transpose(yg), (yg.shape[1]+1, yg.shape[0])))
-		elif wrap != 0:
-		    raise ValueError("Invalid wrap specifier, must be 0, 1 or 2.")
-	      elif wrap != 0:
-		  raise ValueError("Non-zero wrap specified and xg and yg are not 2D arrays")
-	     else:
-		 raise ValueError("Specified wrap is not an integer")
-	    pltr_data = (xg, yg)
+        args = args[1:]
+        # Handle pltr_data or separate xg, yg, [wrap]
+        if len(args) == 0:
+            # Default pltr_data
+            pltr_data = None
+        elif len(args) == 1:
+            #Must be pltr_data
+            pltr_data = args[0]
+            args = args[1:]
+        elif len(args) >= 2:
+            xg = numpy.asarray(args[0])
+            if len(xg.shape) < 1 or len(xg.shape) > 2:
+                raise ValueError("xg must be 1D or 2D array")
+            yg = numpy.asarray(args[1])
+            if len(yg.shape) != len(xg.shape):
+                raise ValueError("yg must have same number of dimensions as xg")
+            args = args[2:]
+            # wrap only relevant if xg and yg specified.
+            if len(args) > 0:
+             if type(args[0]) == types.IntType:
+              wrap = args[0]
+              args = args[1:]
+              if len(xg.shape) == 2 and len(yg.shape) == 2 and  \
+              z.shape == xg.shape and z.shape == yg.shape:
+                # handle wrap
+                if wrap == 1:
+                    z = numpy.resize(z, (z.shape[0]+1, z.shape[1]))
+                    xg = numpy.resize(xg, (xg.shape[0]+1, xg.shape[1]))
+                    yg = numpy.resize(yg, (yg.shape[0]+1, yg.shape[1]))
+                elif wrap == 2:
+                    z = numpy.transpose(numpy.resize( \
+                    numpy.transpose(z), (z.shape[1]+1, z.shape[0])))
+                    xg = numpy.transpose(numpy.resize( \
+                    numpy.transpose(xg), (xg.shape[1]+1, xg.shape[0])))
+                    yg = numpy.transpose(numpy.resize( \
+                    numpy.transpose(yg), (yg.shape[1]+1, yg.shape[0])))
+                elif wrap != 0:
+                    raise ValueError("Invalid wrap specifier, must be 0, 1 or 2.")
+              elif wrap != 0:
+                  raise ValueError("Non-zero wrap specified and xg and yg are not 2D arrays")
+             else:
+                 raise ValueError("Specified wrap is not an integer")
+            pltr_data = (xg, yg)
     else:
-	# default is identity transformation
-	pltr = pltr0
-	pltr_data = None
+        # default is identity transformation
+        pltr = pltr0
+        pltr_data = None
     if len(args) > 0:
-	raise ValueError("Too many arguments for plshade")
+        raise ValueError("Too many arguments for plshade")
 
     _plshade(z,  xmin, xmax, ymin, ymax, \
     shade_min, shade_max, sh_cmap, sh_color, sh_width, \
@@ -636,14 +636,14 @@ def plscmap1l(itype, pos, coord1, coord2, coord3, *args):
 
     pos = numpy.asarray(pos)
     if len(pos.shape) != 1:
-	raise ValueError("Expected 1D pos array")
-		
+        raise ValueError("Expected 1D pos array")
+                
     if len(args) == 0:
-	# Default alt_hue_path
-	alt_hue_path = numpy.zeros(pos.shape[0]-1,dtype="int")
+        # Default alt_hue_path
+        alt_hue_path = numpy.zeros(pos.shape[0]-1,dtype="int")
     elif len(args) == 1:
-	alt_hue_path = numpy.asarray(args[0])
+        alt_hue_path = numpy.asarray(args[0])
     else:
-	raise ValueError("Too many arguments to plscmap1l")
+        raise ValueError("Too many arguments to plscmap1l")
     _plscmap1l(itype, pos, coord1, coord2, coord3, alt_hue_path)
 plscmap1l.__doc__ = _plscmap1l.__doc__
