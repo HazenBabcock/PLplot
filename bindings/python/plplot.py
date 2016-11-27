@@ -58,9 +58,9 @@ def plcont(z, *args):
     if len(z.shape) != 2:
         raise ValueError("Expected 2D z array")
 
-    if len(args) > 4 and type(args[0]) == types.IntType:
+    if len(args) > 4 and isinstance(args[0], int):
         for i in range(1,4):
-            if type(args[i]) != types.IntType:
+            if not isinstance(args[i], int):
                 raise ValueError("Expected 4 ints for kx,lx,ky,ly")
 
         else:
@@ -79,16 +79,15 @@ def plcont(z, *args):
     else:
         raise ValueError("Missing clev argument")
 
-    if len(args) > 0 and ( \
-    type(args[0]) == types.StringType or \
-    type(args[0]) == types.FunctionType or \
-    type(args[0]) == types.BuiltinFunctionType):
+    if len(args) > 0 and (isinstance(args[0], str) or \
+                          type(args[0]) == types.FunctionType or \
+                          type(args[0]) == types.BuiltinFunctionType):
         pltr = args[0]
         # Handle the string names for the callbacks though specifying the
         # built-in function name directly (without the surrounding quotes)
         # or specifying any user-defined transformation function
         # (following above rules) works fine too.
-        if type(pltr) == types.StringType:
+        if isinstance(pltr, str):
             if pltr == "pltr0":
                 pltr = pltr0
             elif pltr == "pltr1":
@@ -117,7 +116,7 @@ def plcont(z, *args):
             args = args[2:]
             # wrap only relevant if xg and yg specified.
             if len(args) > 0:
-             if type(args[0]) == types.IntType:
+             if isinstance(args[0], int):
               wrap = args[0]
               args = args[1:]
               if len(xg.shape) == 2 and len(yg.shape) == 2 and  \
@@ -173,22 +172,21 @@ def plvect(u, v, *args):
     if (u.shape[0] != v.shape[0]) or (u.shape[1] != v.shape[1]) :
         raise ValueError("Expected u and v arrays to be the same dimensions")
 
-    if len(args) > 0 and (type(args[0]) == types.FloatType or type(args[0]) == numpy.float64) :
+    if len(args) > 0 and (type(args[0]) in [float, numpy.float64]):
         scaling = args[0]
         args = args[1:]
     else:
         raise ValueError("Missing scaling argument")
 
-    if len(args) > 0 and ( \
-    type(args[0]) == types.StringType or \
-    type(args[0]) == types.FunctionType or \
-    type(args[0]) == types.BuiltinFunctionType):
+    if len(args) > 0 and (isinstance(args[0], str) or \
+                          type(args[0]) == types.FunctionType or \
+                          type(args[0]) == types.BuiltinFunctionType):
         pltr = args[0]
         # Handle the string names for the callbacks though specifying the
         # built-in function name directly (without the surrounding quotes)
         # or specifying any user-defined transformation function
         # (following above rules) works fine too.
-        if type(pltr) == types.StringType:
+        if isinstance(pltr, str):
             if pltr == "pltr0":
                 pltr = pltr0
             elif pltr == "pltr1":
@@ -217,7 +215,7 @@ def plvect(u, v, *args):
             args = args[2:]
             # wrap only relevant if xg and yg specified.
             if len(args) > 0:
-             if type(args[0]) == types.IntType:
+             if isinstance(args[0], int):
               wrap = args[0]
               args = args[1:]
               if len(xg.shape) == 2 and len(yg.shape) == 2 and  \
@@ -266,9 +264,9 @@ def plimagefr(img, *args):
 
     if len(args) >= 8 :
         for i in range(8) :
-            if (type(args[i]) != types.FloatType and \
+            if (not isinstance(args[i], float)) and \
                 type(args[i]) != numpy.float64 and \
-                type(args[i]) != types.IntType) :
+                not isinstance(args[i], int):
                 raise ValueError("Expected 8 numbers for xmin, xmax, ymin, ymax, zmin, zmax, valuemin, valuemax")
         else:
             # These 8 args are xmin, xmax, ymin, ymax, zmin, zmax, valuemin, valuemax
@@ -277,16 +275,15 @@ def plimagefr(img, *args):
     else:
         raise ValueError("Expected 8 numbers for xmin, xmax, ymin, ymax, zmin, zmax, valuemin, valuemax")
 
-    if len(args) > 0 and ( \
-    type(args[0]) == types.StringType or \
-    type(args[0]) == types.FunctionType or \
-    type(args[0]) == types.BuiltinFunctionType):
+    if len(args) > 0 and (isinstance(args[0], str) or \
+                          type(args[0]) == types.FunctionType or \
+                          type(args[0]) == types.BuiltinFunctionType):
         pltr = args[0]
         # Handle the string names for the callbacks though specifying the
         # built-in function name directly (without the surrounding quotes)
         # or specifying any user-defined transformation function
         # (following above rules) works fine too.
-        if type(pltr) == types.StringType:
+        if isinstance(pltr, str):
             if pltr == "pltr0":
                 pltr = pltr0
             elif pltr == "pltr1":
@@ -315,7 +312,7 @@ def plimagefr(img, *args):
             args = args[2:]
             # wrap only relevant if xg and yg specified.
             if len(args) > 0:
-             if type(args[0]) == types.IntType:
+             if isinstance(args[0], int):
               wrap = args[0]
               args = args[1:]
               if len(xg.shape) == 2 and len(yg.shape) == 2 and  \
@@ -362,10 +359,10 @@ def plshades(z, *args):
         raise ValueError("Expected 2D z array")
 
     if len(args) > 4 and \
-    (type(args[0]) == types.FloatType or type(args[0]) == numpy.float64 or type(args[0]) == types.IntType) and \
-    (type(args[1]) == types.FloatType or type(args[1]) == numpy.float64 or type(args[1]) == types.IntType) and \
-    (type(args[2]) == types.FloatType or type(args[2]) == numpy.float64 or type(args[2]) == types.IntType) and \
-    (type(args[3]) == types.FloatType or type(args[3]) == numpy.float64 or type(args[3]) == types.IntType):
+       (type(args[0]) in [int, float, numpy.float64]) and \
+       (type(args[1]) in [int, float, numpy.float64]) and \
+       (type(args[2]) in [int, float, numpy.float64]) and \
+       (type(args[3]) in [int, float, numpy.float64]):
         # These 4 args are xmin, xmax, ymin, ymax
         xmin, xmax, ymin, ymax = args[0:4]
         args = args[4:]
@@ -387,7 +384,7 @@ def plshades(z, *args):
         raise ValueError("Missing clev argument")
 
     # fill_width must be present
-    if len(args) > 0 and (type(args[0]) == types.FloatType or type(args[0]) == numpy.float64):
+    if len(args) > 0 and (isinstance(args[0], float) or type(args[0]) == numpy.float64):
         fill_width = args[0]
         args = args[1:]
     else:
@@ -395,8 +392,8 @@ def plshades(z, *args):
 
     # cont_color and cont_width are optional.
     if len(args) > 2 and \
-    type(args[0]) == types.IntType and \
-    (type(args[1]) == types.FloatType or type(args[1]) == numpy.float64):
+       isinstance(args[0], int) and \
+       (type(args[1]) in [float, numpy.float64]):
         # These 2 args are
         cont_color, cont_width = args[0:2]
         args = args[2:]
@@ -405,23 +402,19 @@ def plshades(z, *args):
         cont_color, cont_width = (0,0.)
 
     # rect must be present.
-    if len(args) > 0 and type(args[0]) == types.IntType:
+    if len(args) > 0 and isinstance(args[0], int):
         rect = args[0]
         args = args[1:]
     else:
         raise ValueError("Missing rect argument")
 
-    if len(args) > 0 and ( \
-    type(args[0]) == types.NoneType or \
-    type(args[0]) == types.StringType or \
-    type(args[0]) == types.FunctionType or \
-    type(args[0]) == types.BuiltinFunctionType):
+    if len(args) > 0 and (type(args[0]) in [type(None), str, types.FunctionType, types.BuiltinFunctionType]):
         pltr = args[0]
         # Handle the string names for the callbacks though specifying the
         # built-in function name directly (without the surrounding quotes)
         # or specifying any user-defined transformation function
         # (following above rules) works fine too.
-        if type(pltr) == types.StringType:
+        if isinstance(pltr, str):
             if pltr == "pltr0":
                 pltr = pltr0
             elif pltr == "pltr1":
@@ -450,7 +443,7 @@ def plshades(z, *args):
             args = args[2:]
             # wrap only relevant if xg and yg specified.
             if len(args) > 0:
-             if type(args[0]) == types.IntType:
+             if isinstance(args[0], int):
               wrap = args[0]
               args = args[1:]
               if len(xg.shape) == 2 and len(yg.shape) == 2 and  \
@@ -502,11 +495,11 @@ def plshade(z, *args):
     # Extra check on shade_min = float on end is absolutely necessary
     # to unambiguously figure out where we are in the argument list.
     if len(args) > 9 and \
-    (type(args[0]) == types.FloatType or type(args[0]) == numpy.float64 or type(args[0]) == types.IntType) and \
-    (type(args[1]) == types.FloatType or type(args[1]) == numpy.float64 or type(args[1]) == types.IntType) and \
-    (type(args[2]) == types.FloatType or type(args[2]) == numpy.float64 or type(args[2]) == types.IntType) and \
-    (type(args[3]) == types.FloatType or type(args[3]) == numpy.float64 or type(args[3]) == types.IntType) and \
-    (type(args[4]) == types.FloatType or type(args[4]) == numpy.float64) :
+       (type(args[0]) in [int, float, numpy.float64]) and \
+       (type(args[1]) in [int, float, numpy.float64]) and \
+       (type(args[2]) in [int, float, numpy.float64]) and \
+       (type(args[3]) in [int, float, numpy.float64]) and \
+       (type(args[4]) in [float, numpy.float64]):
         # These 4 args are xmin, xmax, ymin, ymax
         xmin, xmax, ymin, ymax = args[0:4]
         args = args[4:]
@@ -521,11 +514,11 @@ def plshade(z, *args):
     # shade_min, shade_max, sh_cmap, sh_color, sh_width, must be present.
     # sh_color can be either integer or float.
     if len(args) > 5 and \
-    (type(args[0]) == types.FloatType or type(args[0]) == numpy.float64) and \
-    (type(args[1]) == types.FloatType or type(args[1]) == numpy.float64) and \
-    type(args[2]) == types.IntType and \
-    (type(args[3]) == types.FloatType or type(args[3]) == numpy.float64 or type(args[3]) == types.IntType) and \
-    (type(args[4]) == types.FloatType or type(args[4]) == numpy.float64):
+       (type(args[0]) in [float, numpy.float64]) and \
+       (type(args[1]) in [float, numpy.float64]) and \
+       isinstance(args[2], int) and \
+       (type(args[0]) in [int, float, numpy.float64]) and \
+       (type(args[0]) in [float, numpy.float64]):
         shade_min, shade_max, sh_cmap, sh_color, sh_width = args[0:5]
         args = args[5:]
     else:
@@ -533,10 +526,10 @@ def plshade(z, *args):
 
     # min_color, min_width, max_color, max_width are optional.
     if len(args) > 4 and \
-    type(args[0]) == types.IntType and \
-    (type(args[1]) == types.FloatType or type(args[1]) == numpy.float64) and \
-    type(args[2]) == types.IntType and \
-    (type(args[3]) == types.FloatType or type(args[3]) == numpy.float64):
+       isinstance(args[0], int) and \
+       (type(args[1]) in [float, numpy.float64]) and \
+       isinstance(args[2], int) and \
+       (type(args[3]) in [float, numpy.float64]):
         # These 4 args are
         min_color, min_width, max_color, max_width = args[0:4]
         args = args[4:]
@@ -545,23 +538,19 @@ def plshade(z, *args):
         min_color, min_width, max_color, max_width = (0,0.,0,0.)
 
     # rect must be present.
-    if len(args) > 0 and type(args[0]) == types.IntType:
+    if len(args) > 0 and isinstance(args[0], int):
         rect = args[0]
         args = args[1:]
     else:
         raise ValueError("Missing rect argument")
 
-    if len(args) > 0 and ( \
-    type(args[0]) == types.NoneType or \
-    type(args[0]) == types.StringType or \
-    type(args[0]) == types.FunctionType or \
-    type(args[0]) == types.BuiltinFunctionType):
+    if len(args) > 0 and (type(args[0]) in [type(None), str, types.FunctionType, types.BuiltinFunctionType]):
         pltr = args[0]
         # Handle the string names for the callbacks though specifying the
         # built-in function name directly (without the surrounding quotes)
         # or specifying any user-defined transformation function
         # (following above rules) works fine too.
-        if type(pltr) == types.StringType:
+        if isinstance(pltr, str):
             if pltr == "pltr0":
                 pltr = pltr0
             elif pltr == "pltr1":
@@ -590,7 +579,7 @@ def plshade(z, *args):
             args = args[2:]
             # wrap only relevant if xg and yg specified.
             if len(args) > 0:
-             if type(args[0]) == types.IntType:
+             if isinstance(args[0], int):
               wrap = args[0]
               args = args[1:]
               if len(xg.shape) == 2 and len(yg.shape) == 2 and  \
