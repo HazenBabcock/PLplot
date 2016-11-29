@@ -1266,7 +1266,15 @@ typedef void ( *label_func )( PLINT, PLFLT, char *, PLINT, PLPointer );
         PyObject  * rep  = PyObject_Repr( input );
         if ( rep )
         {
-            char* str = PyString_AsString( rep );
+	    // Memory leaks here? str and uni_str are not freed?
+	    char* str;
+	    if ( PyUnicode_Check( rep ) ){
+                PyObject *uni_str = PyUnicode_AsEncodedString( rep , "utf-8", "Error ~");
+		str = PyBytes_AS_STRING( uni_str );
+	    }
+	    else {
+                str = PyString_AsString( rep );
+	    }
             if ( strcmp( str, "<built-in function pltr0>" ) == 0 )
             {
                 result      = pltr0;
