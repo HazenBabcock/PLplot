@@ -60,7 +60,11 @@ if(ENABLE_python)
   if(PYTHON_HAVE_PYBUFFER)
     set(CMAKE_SWIG_FLAGS ${CMAKE_SWIG_FLAGS} -DPYTHON_HAVE_PYBUFFER)
   endif(PYTHON_HAVE_PYBUFFER)
-
+  
+#  if("3.0.0" VERSION_LESS ${PYTHON_VERSION})
+#    set(CMAKE_SWIG_FLAGS ${CMAKE_SWIG_FLAGS} "-py3")
+#  endif("3.0.0" VERSION_LESS ${PYTHON_VERSION})
+  
   set(CMAKE_SWIG_OUTDIR ${CMAKE_CURRENT_BINARY_DIR})
 
   set(SWIG_MODULE_plplotcmodule_EXTRA_DEPS
@@ -78,6 +82,17 @@ if(ENABLE_python)
 
   swig_link_libraries(plplotcmodule plplot ${PYTHON_LIBRARIES})
 
+  # This creates the _plplotc.so library that Python3 will look for. It
+  # will not find the _plplotcmodule.so that Python2 would fine. Ideally
+  # we'd probably just generate this library, but for now it is safer(?)
+  # and easier just to make them both.
+  set_target_properties(
+    _plplotcmodule
+    PROPERTIES
+    SUFFIX ".so"
+    OUTPUT_NAME "_plplotc"
+    )
+    
   if(USE_RPATH)
     get_target_property(LIB_INSTALL_RPATH plplot INSTALL_RPATH)
     set_target_properties(
