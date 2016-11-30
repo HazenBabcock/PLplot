@@ -173,7 +173,7 @@ def plot1(type, x_label, y_label, alty_label, title_label, line_label, legend_te
     # Data for first legend entry.
     opt_array[0] = PL_LEGEND_LINE
     text_colors[0] = 2
-    text[0] = legend_text[0]
+    text[0] = legend_text[0].encode("utf8")
     line_colors[0] = 2
     line_styles[0] = 1
     line_widths[0] = 1.
@@ -182,7 +182,7 @@ def plot1(type, x_label, y_label, alty_label, title_label, line_label, legend_te
     if nlegend > 1:
         opt_array[1]      = PL_LEGEND_LINE | PL_LEGEND_SYMBOL
         text_colors[1]    = 3
-        text[1] = legend_text[1]
+        text[1] = legend_text[1].encode("utf8")
         line_colors[1]    = 3
         line_styles[1]    = 1
         line_widths[1]    = 1.
