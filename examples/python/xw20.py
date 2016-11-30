@@ -22,6 +22,7 @@
 from plplot_py_demos import *
 
 import os.path
+import struct
 import sys
 
 XDIM = 260
@@ -61,16 +62,16 @@ def save_plot(fname):
     plsstrm(cur_strm)
 
 def read_img(fname):
-
+    
     if (not os.path.exists(fname)):
         return [1,[],0,0,0]
 
     fp = open(fname, mode='rb')
 
     # Check correct version
-    ver = fp.readline()
+    ver = fp.readline().decode()
 
-    if (ver != "P5\n"):
+    if (ver != 'P5\n'):
         fp.close()
         return [1,[],0,0,0]
 
@@ -82,17 +83,17 @@ def read_img(fname):
     fp.seek(ptr)
 
     # Get width, height, num colors
-    [w, h] = fp.readline().split(' ')
+    [w, h] = fp.readline().split()
     w = int(w)
     h = int(h)
     nc = int(fp.readline())
 
-    tmp = fp.read(w*h)
+    tmp = bytearray(fp.read(w*h))
 
     img = zeros(w*h)
     for i in range(w):
         for j in range(h):
-            img[i*h+j] = ord(tmp[(h-1-j)*w+i])
+            img[i*h+j] = tmp[(h-1-j)*w+i]
 
     img = reshape(img,[w,h])
 
@@ -229,9 +230,11 @@ def main():
     if (err):
         [err, img, width, height, num_col] = read_img("../Chloe.pgm")
         if (err):
-            plabort("No such file")
-            plend()
-            sys.exit(1)
+            [err, img, width, height, num_col] = read_img("../../Chloe.pgm")
+            if (err):
+                plabort("No such file")
+                plend()
+                sys.exit(1)
 
     # Set gray colormap
     gray_cmap(num_col)
