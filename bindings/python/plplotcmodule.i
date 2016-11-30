@@ -1574,6 +1574,8 @@ typedef void ( *label_func )( PLINT, PLFLT, char *, PLINT, PLPointer );
 %typemap( in ) const char *legline[4] ( char** tmp = NULL )
 {
     int i;
+    PyObject *elt, *unicode_string;
+    
     if ( !PySequence_Check( $input ) || PySequence_Size( $input ) != 4 )
     {
         PyErr_SetString( PyExc_ValueError, "Requires a sequence of 4 strings." );
@@ -1590,7 +1592,15 @@ typedef void ( *label_func )( PLINT, PLFLT, char *, PLINT, PLPointer );
     $1 = tmp;
     for ( i = 0; i < 4; i++ )
     {
-        $1[i] = PyString_AsString( PySequence_Fast_GET_ITEM( $input, i ) );
+        $1[i] = NULL;
+        elt = PySequence_Fast_GET_ITEM( $input, i );
+	if ( PyString_Check( elt ) ){
+	    $1[i] = PyString_AsString( elt );
+	}
+	else if ( PyUnicode_Check( elt ) ){
+	    unicode_string = PyUnicode_AsEncodedString( elt , "utf-8", "Error ~");
+	    $1[i] = PyBytes_AS_STRING( unicode_string );	     
+	}
         if ( $1[i] == NULL )
         {
             free( tmp );
