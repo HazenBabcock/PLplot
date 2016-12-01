@@ -54,6 +54,8 @@
 # (5) decade represents a factor of 10, see
 #     http://en.wikipedia.org/wiki/Decade_(log_scale) .
 
+import sys
+
 from plplot_py_demos import *
 
 # main
@@ -169,11 +171,11 @@ def plot1(type, x_label, y_label, alty_label, title_label, line_label, legend_te
     symbols = zeros(nlegend, "S10")
     # Only specify legend data that are required according to the
     # value of opt_array for that entry.
-
+    
     # Data for first legend entry.
     opt_array[0] = PL_LEGEND_LINE
     text_colors[0] = 2
-    text[0] = legend_text[0].encode("utf8")
+    text[0] = legend_text[0].encode() if (sys.version_info > (3, 0)) else legend_text[0]
     line_colors[0] = 2
     line_styles[0] = 1
     line_widths[0] = 1.
@@ -182,7 +184,7 @@ def plot1(type, x_label, y_label, alty_label, title_label, line_label, legend_te
     if nlegend > 1:
         opt_array[1]      = PL_LEGEND_LINE | PL_LEGEND_SYMBOL
         text_colors[1]    = 3
-        text[1] = legend_text[1].encode("utf8")
+        text[1] = legend_text[1].encode() if (sys.version_info > (3, 0)) else legend_text[1]
         line_colors[1]    = 3
         line_styles[1]    = 1
         line_widths[1]    = 1.

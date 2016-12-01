@@ -27,6 +27,8 @@
 #  course, you must have the appropriate TrueType fonts installed to
 #  have access to all the required glyphs.
 
+import sys
+
 from plplot_py_demos import *
 
 position_options = [
@@ -545,7 +547,7 @@ def main():
     symbol_colors[3] = 4
     symbol_scales[3] = text_scale
     symbol_numbers[3] = 4
-    symbols[3] = special_symbols[2].encode("utf8")
+    symbols[3] = special_symbols[2].encode() if (sys.version_info > (3, 0)) else special_symbols[2]
 
     opt_array[4] = PL_LEGEND_SYMBOL | PL_LEGEND_LINE
     text[4] = "L & S"
@@ -556,7 +558,7 @@ def main():
     symbol_colors[4] = 5
     symbol_scales[4] = text_scale
     symbol_numbers[4] = 4
-    symbols[4] = special_symbols[2].encode("utf8")
+    symbols[4] = special_symbols[2].encode() if (sys.version_info > (3, 0)) else special_symbols[2]
 
     opt = opt_base
     plscol0a( 15, 32, 32, 32, 0.70 )
@@ -572,12 +574,12 @@ def main():
     # Set up symbol legend entries with various symbols.
     for i in range(nlegend):
         opt_array[i] = PL_LEGEND_SYMBOL
-        text[i] = ("Symbol " + special_symbols[i]).encode("utf8")
+        text[i] = ("Symbol " + special_symbols[i]).encode() if (sys.version_info > (3,0)) else ("Symbol " + special_symbols[i])
         text_colors[i] = i+1
         symbol_colors[i] = i+1
         symbol_scales[i] = text_scale
         symbol_numbers[i] = 4
-        symbols[i] = special_symbols[i].encode("utf8")
+        symbols[i] = special_symbols[i].encode() if (sys.version_info > (3, 0)) else special_symbols[i]
 
     opt = opt_base
     x += legend_width
@@ -599,7 +601,7 @@ def main():
         symbol_colors[i] = i+1
         symbol_scales[i] = text_scale
         symbol_numbers[i] = i+2
-        symbols[i] = special_symbols[2].encode("utf8")
+        symbols[i] = special_symbols[2].encode() if (sys.version_info > (3, 0)) else special_symbols[2]
 
     opt = opt_base
     x += legend_width
